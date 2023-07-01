@@ -1,0 +1,21 @@
+.center-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.login-box{
+    margin: 30px;
+}
+
+.center-container a{
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.center-container a:hover{
+    color: rgb(25, 73, 231);
+}
