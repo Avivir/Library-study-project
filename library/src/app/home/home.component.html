@@ -1,0 +1,41 @@
+
+<html>
+<head>
+  <title>Library</title>
+
+</head>
+
+<body>
+<div class="screen-template">
+  <div class="left-side-template">
+    <a><i class="pi pi-bookmark"></i></a>
+    <h1>Biblioteka</h1>
+    <input type="text" placeholder="szukaj" name="searchBox" pInputText />
+  </div>
+
+  <div class="right-side-template">
+    <div class="menu-bar">
+      <ul>
+        <li p-submenu>
+          <a><i class="pi pi-plus"></i></a>
+          <ul class="p-submenu-content">
+            <li><a routerLink="addBook">Dodaj</a></li>
+            <li><a href="#">Usun</a></li>
+          </ul>
+        </li>
+        <li p-submenu>
+          <a><i class="pi pi-user"></i></a>
+          <ul class="p-submenu-content">
+            <li><a>Zaloguj</a></li>
+            <li><a routerLink="register">Zarejestruj</a></li>
+          </ul>
+        </li>
+        <li>
+          <a><i class="pi pi-heart"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

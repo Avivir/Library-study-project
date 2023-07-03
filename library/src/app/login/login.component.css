@@ -1,0 +1,21 @@
+:host ::ng-deep .login-title {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+:host ::ng-deep .p-card {
+  max-width: 40%;
+  margin: 100px auto 0;
+  padding: 2rem;
+  text-align: center;
+  background: #ffffff;
+}
+
+:host ::ng-deep .p-field {
+  margin-bottom: 1rem;
+}
+
+:host ::ng-deep .login-button {
+  width: 100%;
+}
+
