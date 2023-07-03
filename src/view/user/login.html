@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link href="../../styles/mainPageStyles.css" rel="stylesheet" />
+    <link href="../../styles/login.css" rel="stylesheet" />
+    <script src="../../scripts/login.js"></script>
+    <meta charset="UTF-8">
+    <title>Ekran logowania</title>
+</head>
+<body>
+<div style="padding-bottom: 250px">
+    <h1>Biblioteka</h1>
+</div>
+<div class="container">
+    <div class="message signup">
+        <div class="btn-wrapper">
+            <button class="button" id="register" onclick="location.href='register.html'">Zarejestruj sie</button>
+            <button class="button" id="login" onclick="location.href='login.html'"> Zaloguj sie</button>
+        </div>
+    </div>
+    <div class="form form--login">
+        <div class="form--heading">Witaj ponownie!</div>
+        <form autocomplete="off">
+            <input id="username" type="text" placeholder="Nazwa użytkownika">
+            <input id="password" type="password" placeholder="Hasło">
+            <button class="button" onclick="login()">Login</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,27 +1,29 @@
-.a{
-    text-decoration: none;
-    background-color: black;
+.form-group {
+    margin-bottom: 20px;
 }
 
-#productForm{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+label {
+    display: block;
+    font-weight: bold;
+    float: left;
 }
 
-#productForm {
-    margin: 30px;
-}
-
-.product-form-style a{
+input, textarea {
+    width: 100%;
     padding: 10px;
-    text-decoration: none;
-    color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.product-form-style a:hover{
-    color: rgb(25, 73, 231);
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
+button:hover {
+    background-color: #0056b3;
+}

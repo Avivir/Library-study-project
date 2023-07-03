@@ -10,7 +10,8 @@ function addBook() {
          title: title,
          description: description,
          author: author,
-         filename: file.files[0].name
+         filename: file.files[0].name,
+         isBookAvailable: true
      }
 
      var storedBooks = localStorage.getItem('books');

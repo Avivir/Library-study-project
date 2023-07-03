@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link href="../../styles/mainPageStyles.css" rel="stylesheet" />
+    <link href="../../styles/login.css" rel="stylesheet" />
+    <script src="../../scripts/register.js"></script>
+    <meta charset="UTF-8">
+    <title>Ekran rejestracji</title>
+</head>
+<body>
+<div style="padding-bottom: 250px">
+    <h1>Biblioteka</h1>
+</div>
+<div class="container">
+    <div class="message signup">
+        <div class="btn-wrapper">
+            <button class="button" id="signup" onclick="location.href='register.html'">Zarejestruj się</button>
+            <button class="button" id="login" onclick="location.href='login.html'"> Zaloguj sie</button>
+        </div>
+    </div>
+    <div class="form form-signup">
+        <div class="form--heading">Zarejestruj się!</div>
+        <form>
+            <input id="username" type="text" placeholder="Nazwa uzytkownika">
+            <input id="password" type="password" placeholder="Hasło">
+            <label for="role">Wybierz role:</label>
+            <select id="role" name="rola">
+                <option value="librarian">Bibliotekarz</option>
+                <option value="user">Użytkownik</option>
+            </select>
+            <button class="button" onclick="singUp()">Zarejestruj się</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
