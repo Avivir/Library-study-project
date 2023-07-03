@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,24 +6,42 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  username: string = '';
-  password: string = '';
+export class LoginComponent implements OnInit {
+
+  user: { username: string, password: string } = {
+    username: '',
+    password: ''
+  };
+
+  ngOnInit(): void {
+    const user = localStorage.getItem('currentUser');
+    if (user) {
+      this.user = JSON.parse(user);
+      this.router.navigateByUrl('/home');
+    }
+  }
 
   constructor(private router: Router) {}
 
   login() {
     const user = {
-      username: this.username,
-      password: this.password
+      username: this.user.username,
+      password: this.user.password
     };
 
-    console.log(user)
+    if ((this.user.username === 'admin' && this.user.password === 'admin')) {
+      const user = { username: this.user.username, role: 'admin' };
+      localStorage.setItem('currentUser', JSON.stringify(user));
 
-    if (this.username === 'admin' && this.password === 'admin') {
-      this.router.navigate(['/home'], {state: {user}}).then(r => alert("Problem"));
-     } else {
+      this.router.navigateByUrl('/home');
+    } else {
       alert('Błędny login lub hasło');
     }
   }
+
+  //TODO tu logika od wylogowania do ogarniecia
+  // logout() {
+  //   localStorage.removeItem('currentUser');
+  //   this.router.navigateByUrl('/login');
+  // }
 }
