@@ -38,10 +38,4 @@ export class LoginComponent implements OnInit {
       alert('Błędny login lub hasło');
     }
   }
-
-  //TODO tu logika od wylogowania do ogarniecia
-  // logout() {
-  //   localStorage.removeItem('currentUser');
-  //   this.router.navigateByUrl('/login');
-  // }
 }
