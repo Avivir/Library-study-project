@@ -7,10 +7,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-book.component.css']
 })
 export class AddBookComponent implements OnInit{
+  ngOnInit(): void {
+  }
 
-  form?: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) { }
+}
 
   ngOnInit() {
     this.buildForm();

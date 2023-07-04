@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,14 @@ export class AppComponent {
   inputValue = '';
   isInputCollapsed = false;
 
-  constructor() {
+  constructor(private router: Router) {
     this.adjustInputWidth();
     window.addEventListener('resize', this.adjustInputWidth.bind(this));
+  }
+
+  shouldDisplayNavbar(): boolean {
+    const currentPath = this.router.url;
+    return currentPath !== '/login';
   }
 
   adjustInputWidth() {

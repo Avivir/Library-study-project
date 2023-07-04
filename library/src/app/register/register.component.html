@@ -1,0 +1,56 @@
+<div style="text-align: right;">
+<button class="p-button-right" pButton icon="pi pi-plus" label="Dodaj" (click)="showAddDialog()"></button>
+</div>
+<div>
+<p-table [value]="users">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nazwa użytkownika</th>
+      <th>Hasło</th>
+      <th>Rola</th>
+      <th>Data dodania</th>
+      <th>Akcje</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>{{ user.username }}</td>
+      <td>
+        <button pButton type="button" icon="pi pi-eye" (click)="togglePasswordVisibility(user)">
+          {{ user.showPassword ? user.password : 'Pokaż Hasło' }}
+        </button>
+      </td>
+      <td>{{ user.role }}</td>
+      <td>{{ user.dateAdded | date }}</td>
+      <td>
+        <span *ngIf="user.role != 'admin'">
+        <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                (click)="deleteUser(user)"></button>
+          </span>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="showDialog" [modal]="true" [style]="{ 'max-width': '400px' }">
+  <h2 class="p-dialog-title">Dodaj użytkownika</h2>
+  <form (ngSubmit)="addUser()" class="p-fluid">
+    <div class="p-field">
+      <label for="username" class="p-d-block">Nazwa użytkownika: </label>
+      <input type="text" id="username" [(ngModel)]="newUser.username" name="username" class="p-inputtext" required>
+    </div>
+    <div class="p-field">
+      <label for="password" class="p-d-block">Hasło: </label>
+      <p-password [(ngModel)]="newUser.password" id="password" name="password" [toggleMask]="true" class="p-inputtext" required></p-password>
+    </div>
+    <div class="p-field">
+      <label for="role" class="p-d-block">Rola:</label>
+      <p-dropdown [(ngModel)]="newUser.role" id="role" name="role" [options]="['admin', 'user', 'librarian']" [showClear]="true" class="p-inputtext"></p-dropdown>
+    </div>
+    <div class="p-dialog-footer">
+      <button type="submit" pButton icon="pi pi-check" label="Dodaj" class="p-button-success"></button>
+      <button type="button" pButton icon="pi pi-times" label="Anuluj" (click)="showDialog = false" class="p-button-secondary"></button>
+    </div>
+  </form>
+</p-dialog>
+</div>

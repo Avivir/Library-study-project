@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
+interface User {
+  username: string;
+  password: string;
+  dateAdded: Date;
+  role: string;
+  showPassword: boolean;
+}
 
 @Component({
   selector: 'app-login',
@@ -14,6 +21,11 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
+  adminUsername: string = 'admin';
+  adminPassword: string = 'admin';
+  adminRole: string = 'admin';
+
+
   ngOnInit(): void {
     const user = localStorage.getItem('currentUser');
     if (user) {
@@ -22,7 +34,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   login() {
     const user = {
@@ -30,15 +43,28 @@ export class LoginComponent implements OnInit {
       password: this.user.password
     };
 
-    if ((this.user.username === 'admin' && this.user.password === 'admin')) {
-      const user = { username: this.user.username, role: 'admin' };
-      localStorage.setItem('currentUser', JSON.stringify(user));
+    const usersJson = localStorage.getItem('users');
+    let users: User[] = usersJson ? JSON.parse(usersJson) : [];
 
-      this.router.navigateByUrl('/home');
-    } else {
-      alert('Błędny login lub hasło');
+    const userExist = users.find(user => user.username === this.user.username)
+
+      if (userExist) {
+        if (userExist.password === this.user.password) {
+          localStorage.setItem('currentUser', JSON.stringify( {username: userExist.username, password: userExist.password, role: userExist.role}));
+          this.router.navigateByUrl('/home');
+        } else {
+          alert('Nieprawidłowe hasło');
+        }
+      } else if (this.user.password === this.adminPassword && this.user.username === this.adminUsername) {
+        localStorage.setItem('currentUser', JSON.stringify({
+          username: this.adminPassword,
+          password: this.adminUsername,
+          role: this.adminRole
+        }));
+      } else {
+        alert('Nieprawidłowa nazwa użytkownika');
+      }
     }
-  }
 }
 
 
