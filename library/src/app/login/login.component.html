@@ -1,12 +1,13 @@
-<p-card>
-  <h1 class="login-title">Logowanie</h1>
-  <form (ngSubmit)="login()">
-    <div class="p-field">
-      <input type="text" id="username" name="username" pInputText [(ngModel)]="user.username" placeholder="Login" />
-    </div>
-    <div class="p-field">
-      <input type="password" id="password" name="password" pPassword [(ngModel)]="user.password" placeholder="Hasło" />
-    </div>
-    <button type="submit" pButton label="Zaloguj się" class="login-button"></button>
-  </form>
+<p-card xmlns:p="http://www.w3.org/1999/html">
+    <h1 class="responsive-heading">Logowanie</h1>
+    <form (ngSubmit)="login()">
+      <div class="p-field">
+        <input type="text" id="username" class="responsive-input" name="username" pInputText [(ngModel)]="user.username" placeholder="Login"/>
+      </div>
+      <div class="p-field">
+        <input type="password" id="password" class="responsive-input" name="password" pPassword [(ngModel)]="user.password" placeholder="Hasło" />
+      </div>
+      <button type="submit" pButton label="Zaloguj się" class="login-button"></button>
+    </form>
 </p-card>
+

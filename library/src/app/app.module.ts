@@ -14,9 +14,11 @@ import {MenubarModule} from "primeng/menubar";
 import {TabMenuModule} from "primeng/tabmenu";
 import {DividerModule} from "primeng/divider";
 import {MenuModule} from "primeng/menu";
+import {InputTextModule} from "primeng/inputtext";
+import { AddBookComponent } from './add-book/add-book.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, AddBookComponent],
   imports: [
     BrowserModule,
     CardModule,
@@ -29,6 +31,7 @@ import {MenuModule} from "primeng/menu";
     TabMenuModule,
     DividerModule,
     MenuModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]
