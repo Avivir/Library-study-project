@@ -1,9 +1,49 @@
-12312
+<div style="text-align: right;">
+<button pButton label="Add Book" (click)="showDialog = true"></button>
+</div>
 
-f
-dsf
-sdf
-s
-dfs
-f
-sdf
+<p-table [value]="books">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Tytuł</th>
+      <th>Opis</th>
+      <th>Autor</th>
+      <th>Akcje</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-book>
+    <tr>
+      <td>{{ book.id }}</td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.description }}</td>
+      <td>{{ book.author }}</td>
+      <td>
+        <button pButton icon="pi pi-trash" (click)="deleteBook(book.id)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Dodaj książkę" [(visible)]="showDialog">
+  <form (ngSubmit)="addBook()">
+    <div class="p-field">
+      <label for="title">Tytuł</label>
+      <input id="title" type="text" name="title" pInputText [(ngModel)]="newBook.title" required>
+    </div>
+    <div class="p-field">
+      <label for="description">Opis</label>
+      <input id="description" type="text" name="description" pInputText [(ngModel)]="newBook.description" required>
+    </div>
+    <div class="p-field">
+      <label for="author">Autor</label>
+      <input id="author" type="text" name="author" pInputText [(ngModel)]="newBook.author" required>
+    </div>
+    <div class="p-field">
+      <label for="file">Plik</label>
+      <input id="file" type="file" class="custom-file-input" (change)="onFileSelect($event)" required>
+      <label class="custom-file-label">{{ selectedFileName }}</label>
+    </div>
+    <button pButton type="submit" label="Dodaj"></button>
+  </form>
+</p-dialog>

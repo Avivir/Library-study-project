@@ -1,5 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+
+
+interface Book {
+  id: number
+  title: string,
+  description: string,
+  author: string,
+  file: string,
+}
 
 @Component({
   selector: 'app-add-book',
@@ -7,31 +15,62 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-book.component.css']
 })
 export class AddBookComponent implements OnInit{
-  ngOnInit(): void {
-  }
+  books: Book[] = [];
+  showDialog = false;
 
-}
+  selectedFileName: string = '';
 
   ngOnInit() {
-    this.buildForm();
-  }
+    this.selectedFileName = ''
 
-  buildForm() {
-    this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      message: ['', Validators.required]
-    });
-  }
-
-  submitForm() {
-    if (this.form?.valid) {
-      // Wyślij formularz
-      console.log(this.form.value);
-      this.form.reset();
-    } else {
-      // Walidacja nie powiodła się
-      alert('Formularz zawiera błędy');
+    const storedBooks = localStorage.getItem('books');
+    if (storedBooks) {
+      this.books = JSON.parse(storedBooks);
     }
+  }
+
+  newBook: { author: string; description: string; id: number; title: string, file: string } = {
+    id: 0,
+    title: '',
+    description: '',
+    author: '',
+    file: ''
+  };
+  addBook() {
+    const newId = this.books.length > 0 ? Math.max(...this.books.map(book => book.id)) + 1 : 1;
+    this.newBook.id = newId;
+
+    this.books.push(<Book>this.newBook);
+
+
+    this.newBook = {
+      id: 0,
+      title: '',
+      description: '',
+      author: '',
+      file: ''
+    };
+    this.showDialog = false;
+    this.clearSelectedFile();
+
+    localStorage.setItem('books', JSON.stringify(this.books));
+  }
+
+  clearSelectedFile(): void {
+    const fileInput = document.getElementById('file') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+      this.selectedFileName = '';
+    }
+  }
+
+  deleteBook(bookId: number) {
+    this.books = this.books.filter(book => book.id !== bookId);
+
+    localStorage.setItem('books', JSON.stringify(this.books));
+  }
+
+  onFileSelect(event: any): void {
+    this.selectedFileName = event.target.files[0].name;
   }
 }

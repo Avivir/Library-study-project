@@ -1,20 +1,22 @@
-.form-group {
-  margin-bottom: 20px;
+:host ::ng-deep .p-dialog {
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-label {
-  font-weight: bold;
+:host ::ng-deep .p-dialog .p-dialog-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.input-field {
-  width: 100%;
+:host ::ng-deep .p-dialog .p-footer {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.textarea-field {
-  width: 100%;
-}
-
-.submit-button {
-  padding: 8px 16px;
-  cursor: pointer;
+div {
+  margin: 8px;
 }
