@@ -21,10 +21,11 @@ export class NavbarComponent implements OnInit {
 
     this.items = [
       {label: 'Strona główna', icon: 'pi pi-fw pi-home', routerLink: '/', routerLinkActiveOptions: 'active'},
-      {label: 'Dodaj książkę', icon: 'pi pi-fw pi-shopping-cart', command: () => this.addBook(), routerLinkActiveOptions: 'active'},
+      {label: 'Historia', icon: 'pi pi-fw pi-history', command: () => this.history() },
+      {label: 'Zarządzaj książkami', icon: 'pi pi-fw pi-book', command: () => this.manageBook(), visible: this.isAdmin() || this.isLibrarian()},
       {label: this.user.username, icon: 'pi pi-fw pi-user',
         items: [
-          {label: 'Zarejestruj użytkownika', icon: 'pi pi-fw pi-sign-out', command: () => this.register(), visible: this.isAdmin()},
+          {label: 'Zarejestruj użytkownika', icon: 'pi pi-fw pi-user-plus', command: () => this.register(), visible: this.isAdmin()},
           {label: 'Wyloguj', icon: 'pi pi-fw pi-sign-out', command: () => this.logout()}
         ]
       }
@@ -32,8 +33,6 @@ export class NavbarComponent implements OnInit {
   }
 
   getLoggedUser() {
-    localStorage.getItem('currentUser')
-
     const currentUser = localStorage.getItem('currentUser');
     this.user = currentUser ? JSON.parse(currentUser) : null;
   }
@@ -50,11 +49,14 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('currentUser');
     this.router.navigateByUrl('/login');
   }
-  addBook() {
-    this.router.navigateByUrl('/add-book');
+  manageBook() {
+    this.router.navigateByUrl('/bookManage');
   }
   register() {
     this.router.navigateByUrl('/register');
+  }
+  history() {
+    this.router.navigateByUrl('/history');
   }
 
 }

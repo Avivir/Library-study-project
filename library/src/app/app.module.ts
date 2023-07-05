@@ -15,7 +15,7 @@ import {TabMenuModule} from "primeng/tabmenu";
 import {DividerModule} from "primeng/divider";
 import {MenuModule} from "primeng/menu";
 import {InputTextModule} from "primeng/inputtext";
-import { AddBookComponent } from './add-book/add-book.component';
+import { BookManageComponent } from './bookManage/book-manage.component';
 import {DropdownModule} from "primeng/dropdown";
 import {RippleModule} from "primeng/ripple";
 import {TabViewModule} from "primeng/tabview";
@@ -28,8 +28,9 @@ import {CalendarModule} from "primeng/calendar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DialogService} from "primeng/dynamicdialog";
 import { PanelModule } from 'primeng/panel';
+import { HistoryComponent } from './history/history.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, AddBookComponent, NavbarComponent, RegisterComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, BookManageComponent, NavbarComponent, RegisterComponent, HistoryComponent],
   imports: [
     BrowserModule,
     CardModule,
