@@ -6,10 +6,23 @@
         <div class="book-details">
           <div class="book-title">{{ book.title }}</div>
           <div class="book-author">Autor: {{ book.author }}</div>
-          <button class="book-button" *ngIf="book.showButton">Przycisk</button>
+          <button (click)="showDetails(book.id)" class="book-button" *ngIf="book.showButton">Opis</button>
+          <button class="book-button" *ngIf="book.showButton">Rezerwuj</button>
         </div>
       </div>
     </div>
   </div>
 </p-panel>
+
+<p-dialog header="Opis" [(visible)]="displayDetails">
+  <ng-container *ngIf="selectedBook">
+    <div class="book-details-dialog">
+      <div class="book-title">{{ selectedBook.title }}</div>
+      <div class="book-author">Autor: {{ selectedBook.author }}</div>
+      <div class="book-description">{{ selectedBook.description }}</div>
+      <button class="book-button">Rezerwuj</button>
+    </div>
+  </ng-container>
+</p-dialog>
+
 

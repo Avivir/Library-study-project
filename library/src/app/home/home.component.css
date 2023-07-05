@@ -89,6 +89,7 @@
 
 .book-button {
   padding: 8px 16px;
+  margin: 5px;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -100,6 +101,40 @@
 .book-button:hover {
   opacity: 0.8;
 }
+
+.book-details-dialog {
+  width: 400px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .book-details-dialog {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+.book-details-dialog .ui-dialog-content {
+  padding: 20px;
+}
+
+.book-details-dialog .book-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.book-details-dialog .book-author {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.book-details-dialog .book-description {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 
 
 

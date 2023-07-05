@@ -21,5 +21,14 @@ export class HomeComponent implements OnInit {
       this.books = [];
     }
   }
+
+  displayDetails: boolean = false;
+  selectedBook: any;
+
+  showDetails(bookId: number) {
+    this.selectedBook = this.books?.find(book => book.id === bookId);
+    this.displayDetails = true;
+  }
 }
+
 
