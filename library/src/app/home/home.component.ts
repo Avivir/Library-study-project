@@ -10,6 +10,16 @@ interface Message {
   date: string;
 }
 
+interface Book {
+  id: number
+  title: string,
+  description: string,
+  author: string,
+  file: string,
+  showDescription: boolean,
+  availability: 'available' | 'reserved' | 'borrowed';
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,8 +27,11 @@ interface Message {
 })
 export class HomeComponent implements OnInit {
   books?: any[];
+  currentUser?: User;
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}') as User;
+
     const storedBooks = localStorage.getItem('books');
     if (storedBooks) {
       this.books = JSON.parse(storedBooks);
@@ -35,20 +48,50 @@ export class HomeComponent implements OnInit {
     this.displayDetails = true;
   }
 
-  reserveBook(bookId: number) {
+  reserveBook(_book: Book) {
     const storedBooks = localStorage.getItem('books');
 
     if (storedBooks) {
 
-      const selectedBook = this.books?.find(book => book.id === bookId);
+      const selectedBook = this.books?.find(book => book.id === _book.id);
 
       if (selectedBook && selectedBook.availability === 'available') {
 
         selectedBook.availability = 'reserved';
 
+        this.addMessage(_book , 'reserved');
+
         localStorage.setItem('books', JSON.stringify(this.books));
       }
     }
+  }
+
+  addMessage(_book: Book, state: string){
+    const storedMessages = localStorage.getItem(this.currentUser?.username);
+    let messages: Message[] = [];
+
+    if (storedMessages) {
+      messages = JSON.parse(storedMessages);
+    }
+
+    const newMessage: Message = {
+      content: '',
+      date: new Date().toISOString()
+    };
+
+    switch (state) {
+      case 'reserved':
+          newMessage.content = 'Użytkownik: ' + this.currentUser?.username + ' poprosił o rezerwacje ksiązki ' + _book.id + ':' + _book.title;
+        break;
+
+      case 'borrowed':
+          newMessage.content = '';
+        break;
+    }
+
+    messages.push(newMessage);
+
+    localStorage.setItem('messages', JSON.stringify(this.currentUser?.username));
   }
 }
 
