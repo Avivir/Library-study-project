@@ -38,11 +38,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const user = {
-      username: this.user.username,
-      password: this.user.password
-    };
-
     const usersJson = localStorage.getItem('users');
     let users: User[] = usersJson ? JSON.parse(usersJson) : [];
 

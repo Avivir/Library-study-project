@@ -13,10 +13,10 @@ interface Book {
 
 @Component({
   selector: 'app-add-book',
-  templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.css']
+  templateUrl: './book-manage.component.html',
+  styleUrls: ['./book-manage.component.css']
 })
-export class AddBookComponent implements OnInit{
+export class BookManageComponent implements OnInit{
   books: Book[] = [];
   showDialog = false;
 

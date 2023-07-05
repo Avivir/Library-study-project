@@ -52,7 +52,7 @@ import { HistoryComponent } from './history/history.component';
     DialogModule,
     CalendarModule,
     BrowserAnimationsModule,
-    PanelModule
+    PanelModule,
   ],
   providers: [MessageService, ConfirmationService, DialogService],
   bootstrap: [AppComponent]

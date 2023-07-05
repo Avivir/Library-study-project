@@ -5,6 +5,11 @@ interface User {
   role: string;
 }
 
+interface Message {
+  content: string;
+  date: string;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
