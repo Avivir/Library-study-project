@@ -19,7 +19,8 @@
       <td>{{ book.description }}</td>
       <td>{{ book.author }}</td>
       <td>
-        <button pButton icon="pi pi-trash" (click)="deleteBook(book.id)"></button>
+        <button style="margin: 5px" pButton icon="pi pi-trash" (click)="deleteBook(book.id)"></button>
+        <button style="margin: 5px" *ngIf="book.availability === 'reserved'" title="Potwierdź lub anuluj wypożyczenie" pButton icon="pi pi-check" (click)="confirmBorrowBook(book.id)"></button>
       </td>
     </tr>
   </ng-template>
@@ -46,4 +47,10 @@
     </div>
     <button pButton type="submit" label="Dodaj"></button>
   </form>
+</p-dialog>
+
+<p-dialog header="Potwierdź wypożyczenie" [(visible)]="borrowDialogVisible">
+  <p>Czy zezwalasz na wypożyczenie tej książki?</p>
+  <button pButton type="button" label="Tak" (click)="borrowBookConfirmed(true)"></button>
+  <button pButton type="button" label="Nie" (click)="borrowBookConfirmed(false)"></button>
 </p-dialog>

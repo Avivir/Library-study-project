@@ -5,6 +5,11 @@ export interface Message {
   date: string;
 }
 
+interface User {
+  username: string;
+  role: string;
+}
+
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -12,12 +17,14 @@ export interface Message {
 })
 export class HistoryComponent implements OnInit{
   userHistory: Message[] = [];
+  // @ts-ignore
+  currentUser: User;
 
   ngOnInit() {
-    const currentUser = localStorage.getItem('currentUser');
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
 
-    if(currentUser) {
-      const historyData = localStorage.getItem(currentUser);
+    if(this.currentUser) {
+      const historyData = localStorage.getItem(this.currentUser.username);
       if (historyData) {
         this.userHistory = JSON.parse(historyData) || [];
       }

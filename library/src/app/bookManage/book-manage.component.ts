@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+interface Message {
+  content: string;
+  date: string;
+}
 
 interface Book {
   id: number
@@ -19,11 +23,19 @@ interface Book {
 export class BookManageComponent implements OnInit{
   books: Book[] = [];
   showDialog = false;
+  borrowDialogVisible: boolean = false;
+  selectedBookId: number = 0;
 
   selectedFileName: string = '';
   selectedFilePath: string = '';
 
+  // @ts-ignore
+  currentUser: User;
+
+
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
     this.selectedFileName = ''
 
     const storedBooks = localStorage.getItem('books');
@@ -46,6 +58,8 @@ export class BookManageComponent implements OnInit{
     this.newBook.availability = 'available';
     this.books.push(<Book>this.newBook);
 
+    this.selectedBookId = newId;
+    this.addMessage('add')
 
     this.newBook = {
       id: 0,
@@ -70,6 +84,9 @@ export class BookManageComponent implements OnInit{
   }
 
   deleteBook(bookId: number) {
+    this.selectedBookId = bookId;
+    this.addMessage('delete')
+
     this.books = this.books.filter(book => book.id !== bookId);
 
     localStorage.setItem('books', JSON.stringify(this.books));
@@ -83,5 +100,57 @@ export class BookManageComponent implements OnInit{
     this.newBook.file = this.selectedFilePath;
   }
 
+  confirmBorrowBook(bookId: number) {
+    this.borrowDialogVisible = true;
+    this.selectedBookId = bookId;
+  }
+
+  borrowBookConfirmed(yesOrNot: boolean) {
+    const selectedBook = this.books.find(book => book.id === this.selectedBookId);
+
+    const decision = yesOrNot ? 'borrowed' : 'available'
+
+    this.addMessage(decision)
+
+    if (selectedBook) {
+      selectedBook.availability = decision;
+      localStorage.setItem('books', JSON.stringify(this.books));
+    }
+
+    this.borrowDialogVisible = false;
+  }
+
+  addMessage(state: string){
+    const storedMessages = localStorage.getItem(this.currentUser.username);
+    let messages: Message[] = [];
+
+    if (storedMessages) {
+      messages = JSON.parse(storedMessages);
+    }
+
+    const newMessage: Message = {
+      content: '',
+      date: new Date().toISOString()
+    };
+
+    switch (state) {
+      case 'borrowed':
+        newMessage.content = 'Użytkownik: ' + this.currentUser.username + ' zezwolił na rezerwacje książki Id: ' + this.selectedBookId;
+        break;
+        case 'available':
+        newMessage.content = 'Użytkownik: ' + this.currentUser.username + ' nie zezwolił na rezerwacje książki Id: ' + this.selectedBookId;
+        break;
+        case 'add':
+        newMessage.content = 'Użytkownik: ' + this.currentUser.username + ' dodał ksiązkę Id: ' + this.selectedBookId;
+        break;
+        case 'delete':
+        newMessage.content = 'Użytkownik: ' + this.currentUser.username + ' usunął ksiązkę Id: ' + this.selectedBookId;
+        break;
+    }
+
+    messages.push(newMessage);
+
+    localStorage.setItem(this.currentUser.username, JSON.stringify(messages));
+  }
 }
 

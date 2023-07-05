@@ -27,10 +27,11 @@ interface Book {
 })
 export class HomeComponent implements OnInit {
   books?: any[];
-  currentUser?: User;
+  // @ts-ignore
+  currentUser: User;
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}') as User;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
 
     const storedBooks = localStorage.getItem('books');
     if (storedBooks) {
@@ -67,7 +68,7 @@ export class HomeComponent implements OnInit {
   }
 
   addMessage(_book: Book, state: string){
-    const storedMessages = localStorage.getItem(this.currentUser?.username);
+    const storedMessages = localStorage.getItem(this.currentUser.username);
     let messages: Message[] = [];
 
     if (storedMessages) {
@@ -81,17 +82,13 @@ export class HomeComponent implements OnInit {
 
     switch (state) {
       case 'reserved':
-          newMessage.content = 'Użytkownik: ' + this.currentUser?.username + ' poprosił o rezerwacje ksiązki ' + _book.id + ':' + _book.title;
-        break;
-
-      case 'borrowed':
-          newMessage.content = '';
+        newMessage.content = 'Użytkownik: ' + this.currentUser.username + ' poprosił o rezerwacje ksiązki Id: ' + _book.id + ' Tytuł: ' + _book.title;
         break;
     }
 
     messages.push(newMessage);
 
-    localStorage.setItem('messages', JSON.stringify(this.currentUser?.username));
+    localStorage.setItem(this.currentUser.username, JSON.stringify(messages));
   }
 }
 
