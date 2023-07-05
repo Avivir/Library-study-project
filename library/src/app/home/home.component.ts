@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuItem} from "primeng/api";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +11,15 @@ export class HomeComponent implements OnInit {
     role: ''
   };
 
+  books?: any[];
   ngOnInit() {
+    // Sprawdzanie, czy istnieją dane książek w localStorage
+    const storedBooks = localStorage.getItem('books');
+    if (storedBooks) {
+      this.books = JSON.parse(storedBooks);
+    } else {
+      this.books = [];
+    }
   }
 }
 

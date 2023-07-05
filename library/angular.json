@@ -30,7 +30,9 @@
               "node_modules/primeng/resources/primeng.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/primeicons/primeicons.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -27,7 +27,7 @@ import {DialogModule} from "primeng/dialog";
 import {CalendarModule} from "primeng/calendar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DialogService} from "primeng/dynamicdialog";
-
+import { PanelModule } from 'primeng/panel';
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, AddBookComponent, NavbarComponent, RegisterComponent],
   imports: [
@@ -50,7 +50,8 @@ import {DialogService} from "primeng/dynamicdialog";
     TableModule,
     DialogModule,
     CalendarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PanelModule
   ],
   providers: [MessageService, ConfirmationService, DialogService],
   bootstrap: [AppComponent]

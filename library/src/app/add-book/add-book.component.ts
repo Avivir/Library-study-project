@@ -7,6 +7,7 @@ interface Book {
   description: string,
   author: string,
   file: string,
+  showDescription: boolean,
 }
 
 @Component({
@@ -19,6 +20,7 @@ export class AddBookComponent implements OnInit{
   showDialog = false;
 
   selectedFileName: string = '';
+  selectedFilePath: string = '';
 
   ngOnInit() {
     this.selectedFileName = ''
@@ -71,6 +73,12 @@ export class AddBookComponent implements OnInit{
   }
 
   onFileSelect(event: any): void {
-    this.selectedFileName = event.target.files[0].name;
+    //this.selectedFileName = event.target.files[0].name;
+    const file = event.target.files[0];
+    this.selectedFileName = file.name;
+    this.selectedFilePath = URL.createObjectURL(file);
+    this.newBook.file = this.selectedFilePath;
   }
+
 }
+
