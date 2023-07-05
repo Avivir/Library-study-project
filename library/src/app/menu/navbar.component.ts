@@ -42,6 +42,10 @@ export class NavbarComponent implements OnInit {
     return this.user.role === 'admin'
   }
 
+  isLibrarian() {
+    return this.user.role === 'librarian'
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.router.navigateByUrl('/login');
