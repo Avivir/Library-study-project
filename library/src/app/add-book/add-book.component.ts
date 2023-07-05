@@ -8,6 +8,7 @@ interface Book {
   author: string,
   file: string,
   showDescription: boolean,
+  availability: 'available' | 'reserved' | 'borrowed';
 }
 
 @Component({
@@ -31,17 +32,18 @@ export class AddBookComponent implements OnInit{
     }
   }
 
-  newBook: { author: string; description: string; id: number; title: string, file: string } = {
+  newBook: { author: string; description: string; id: number; title: string, file: string; availability: 'available' | 'reserved' | 'borrowed' } = {
     id: 0,
     title: '',
     description: '',
     author: '',
-    file: ''
+    file: '',
+    availability: 'available',
   };
   addBook() {
     const newId = this.books.length > 0 ? Math.max(...this.books.map(book => book.id)) + 1 : 1;
     this.newBook.id = newId;
-
+    this.newBook.availability = 'available';
     this.books.push(<Book>this.newBook);
 
 
@@ -50,7 +52,8 @@ export class AddBookComponent implements OnInit{
       title: '',
       description: '',
       author: '',
-      file: ''
+      file: '',
+      availability: 'available',
     };
     this.showDialog = false;
     this.clearSelectedFile();

@@ -7,7 +7,8 @@
           <div class="book-title">{{ book.title }}</div>
           <div class="book-author">Autor: {{ book.author }}</div>
           <button (click)="showDetails(book.id)" class="book-button" *ngIf="book.showButton">Opis</button>
-          <button class="book-button" *ngIf="book.showButton">Rezerwuj</button>
+          <button (click)="reserveBook(book.id)" class="book-button" *ngIf="book.showButton && book.availability === 'available'">Rezerwuj</button>
+          <button class="book-button" *ngIf="book.showButton && book.availability == 'reserved'">Zarezerwowana</button>
         </div>
       </div>
     </div>
@@ -20,9 +21,11 @@
       <div class="book-title">{{ selectedBook.title }}</div>
       <div class="book-author">Autor: {{ selectedBook.author }}</div>
       <div class="book-description">{{ selectedBook.description }}</div>
-      <button class="book-button">Rezerwuj</button>
+      <button (click)="reserveBook(selectedBook.id)" class="book-button" *ngIf="selectedBook.availability === 'available'">Rezerwuj</button>
+      <button class="book-button" *ngIf="selectedBook.availability !== 'available'">Zarezerwowana</button>
     </div>
   </ng-container>
 </p-dialog>
+
 
 

@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   };
 
   books?: any[];
+
   ngOnInit() {
     // Sprawdzanie, czy istnieją dane książek w localStorage
     const storedBooks = localStorage.getItem('books');
@@ -28,6 +29,22 @@ export class HomeComponent implements OnInit {
   showDetails(bookId: number) {
     this.selectedBook = this.books?.find(book => book.id === bookId);
     this.displayDetails = true;
+  }
+
+  reserveBook(bookId: number) {
+    const storedBooks = localStorage.getItem('books');
+
+    if (storedBooks) {
+
+      const selectedBook = this.books?.find(book => book.id === bookId);
+
+      if (selectedBook && selectedBook.availability === 'available') {
+
+        selectedBook.availability = 'reserved';
+
+        localStorage.setItem('books', JSON.stringify(this.books));
+      }
+    }
   }
 }
 
