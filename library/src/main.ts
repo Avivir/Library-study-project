@@ -11,7 +11,6 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 
 
 function loadDataToLocalStorage() {
- // Przykładowa lista książek
  const books = [
 
    { id: 1,

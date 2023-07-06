@@ -9,8 +9,6 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   title = 'library';
-
-  inputValue = '';
   isInputCollapsed = false;
 
   constructor(private router: Router) {
