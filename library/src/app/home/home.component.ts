@@ -69,6 +69,21 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  giveBackBook(_book: Book){
+    const storedBooks = localStorage.getItem('books');
+
+    if(storedBooks){
+      const selectedBook = this.books?.find(book => book.id === _book.id);
+
+      if(selectedBook && selectedBook.availability === 'borrowed' && selectedBook.whoHaveBook == this.currentUser.username){
+        selectedBook.availability = 'available';
+        selectedBook.isBookReservated = false;
+        selectedBook.whoHaveBook = '';
+        localStorage.setItem('books', JSON.stringify(this.books));
+      }
+    }
+  }
+
   addMessage(_book: Book, state: string){
     const storedMessages = localStorage.getItem(this.currentUser.username);
     let messages: Message[] = [];
