@@ -79,6 +79,9 @@ export class HomeComponent implements OnInit {
         selectedBook.availability = 'available';
         selectedBook.isBookReservated = false;
         selectedBook.whoHaveBook = '';
+
+        this.addMessage(_book, 'return');
+
         localStorage.setItem('books', JSON.stringify(this.books));
       }
     }
@@ -100,6 +103,9 @@ export class HomeComponent implements OnInit {
     switch (state) {
       case 'reserved':
         newMessage.content = 'Użytkownik: ' + this.currentUser.username + ' poprosił o rezerwacje ksiązki Id: ' + _book.id + ' Tytuł: ' + _book.title;
+        break;
+        case 'return':
+        newMessage.content = 'Użytkownik: ' + this.currentUser.username + ' oddał książkę o Id: ' + _book.id + ' Tytuł: ' + _book.title;
         break;
     }
 
