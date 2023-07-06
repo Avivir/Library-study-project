@@ -106,6 +106,7 @@ export class BookManageComponent implements OnInit{
     this.newBook.file = this.selectedFilePath;
   }
 
+
   confirmBorrowBook(bookId: number) {
     this.borrowDialogVisible = true;
     this.selectedBookId = bookId;

@@ -51,6 +51,6 @@
 
 <p-dialog header="Potwierdź wypożyczenie" [(visible)]="borrowDialogVisible">
   <p>Czy zezwalasz na wypożyczenie tej książki?</p>
-  <button pButton type="button" label="Tak" (click)="borrowBookConfirmed(true)"></button>
-  <button pButton type="button" label="Nie" (click)="borrowBookConfirmed(false)"></button>
+  <button pButton class="decide-button" type="button" label="Tak" (click)="borrowBookConfirmed(true)"></button>
+  <button pButton class="decide-button" type="button" label="Nie" (click)="borrowBookConfirmed(false)"></button>
 </p-dialog>
