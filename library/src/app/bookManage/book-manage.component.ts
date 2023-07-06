@@ -12,7 +12,9 @@ interface Book {
   author: string,
   file: string,
   showDescription: boolean,
-  availability: 'available' | 'reserved' | 'borrowed';
+  availability: 'available' | 'reserved' | 'borrowed',
+  whoHaveBook: string,
+  isBookReservated: boolean,
 }
 
 @Component({
@@ -44,13 +46,15 @@ export class BookManageComponent implements OnInit{
     }
   }
 
-  newBook: { author: string; description: string; id: number; title: string, file: string; availability: 'available' | 'reserved' | 'borrowed' } = {
+  newBook: { author: string; description: string; id: number; title: string, file: string; availability: 'available' | 'reserved' | 'borrowed'; whoHaveBook: string; isBookReservated: boolean; } = {
     id: 0,
     title: '',
     description: '',
     author: '',
     file: '',
     availability: 'available',
+    whoHaveBook:'',
+    isBookReservated: false,
   };
   addBook() {
     const newId = this.books.length > 0 ? Math.max(...this.books.map(book => book.id)) + 1 : 1;
@@ -68,6 +72,8 @@ export class BookManageComponent implements OnInit{
       author: '',
       file: '',
       availability: 'available',
+      whoHaveBook:'',
+      isBookReservated: false,
     };
     this.showDialog = false;
     this.clearSelectedFile();
@@ -112,11 +118,14 @@ export class BookManageComponent implements OnInit{
 
     this.addMessage(decision)
 
+    if (decision == 'borrowed' && selectedBook){
+      selectedBook.isBookReservated = true;
+    }
+
     if (selectedBook) {
       selectedBook.availability = decision;
       localStorage.setItem('books', JSON.stringify(this.books));
     }
-
     this.borrowDialogVisible = false;
   }
 

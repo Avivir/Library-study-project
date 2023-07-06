@@ -60,6 +60,8 @@ export class HomeComponent implements OnInit {
 
         selectedBook.availability = 'reserved';
 
+        selectedBook.whoHaveBook = this.currentUser.username;
+
         this.addMessage(_book , 'reserved');
 
         localStorage.setItem('books', JSON.stringify(this.books));

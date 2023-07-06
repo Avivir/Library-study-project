@@ -8,7 +8,9 @@
           <div class="book-author">Autor: {{ book.author }}</div>
           <button (click)="showDetails(book.id)" class="book-button" *ngIf="book.showButton">Opis</button>
           <button (click)="reserveBook(book)" class="book-button" *ngIf="book.showButton && book.availability === 'available'">Rezerwuj</button>
-          <button class="reserved-button" *ngIf="book.showButton && book.availability == 'reserved'">Zarezerwowana</button>
+          <button class="reserved-button" *ngIf="book.showButton && book.availability == 'reserved'">zarezerwowana</button>
+          <button class="borrowed-button" *ngIf="book.showButton && book.availability == 'borrowed' && book.whoHaveBook != currentUser.username">wypożyczona</button>
+          <button class="give-back-button" *ngIf="book.showButton && book.availability == 'borrowed' && book.whoHaveBook == currentUser.username && book.isBookReservated">oddaj</button>
         </div>
       </div>
     </div>

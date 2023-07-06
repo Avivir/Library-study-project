@@ -109,6 +109,28 @@
   transition: opacity 0.3s;
 }
 
+.borrowed-button {
+  padding: 8px 16px;
+  margin: 5px;
+  background-color: #757472;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.give-back-button {
+  padding: 8px 16px;
+  margin: 5px;
+  background-color: #07940c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
 .book-button:hover {
   opacity: 0.8;
 }
